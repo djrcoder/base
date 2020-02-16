@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+
+  const [results, setResults] = useState([]);
+
+
+  useEffect(() => {
+    async function getAll() {
+      const result = await axios("/api/people")
+      setResults(result.data);
+      console.log(result.data.body)
+    }
+    getAll()
+  }, [])
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>{results.map(item => (
+          <ul key={item.id}>
+            Name: {item.name}
+            <br />
+            Age: {item.age}
+            <br></br>
+          </ul>
+        ))}
+        </div>
+
       </header>
     </div>
   );
