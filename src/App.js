@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import AddTodos from "./components/AddTodos"
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
           </ul>
         ))}
         </div>
-
+        <AddTodos />
       </header>
     </div>
   );
